@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final int PICK_FILE_REQUEST = 1;
     private int isObject = 0;
     private Uri uri, uriFile;
-    private Bitmap imageBitmap;
+    private Bitmap imageBitmap, bitmapDocument;
     private String currentPhotoPath;
     private String selectedFilePath;
     private File image;
@@ -157,7 +157,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if(ValidateRegister())
                 {
                     arrFile[0] = createTempFile(imageBitmap);//image;
-                    arrFile[1] = new File(selectedFilePath);
+                    arrFile[1] = createTempFile(bitmapDocument);//new File(selectedFilePath);
                     signUp(arrFile);
                 }
             }
@@ -275,7 +275,6 @@ public class RegisterActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-            imageBitmap = (Bitmap) data.getExtras().get("data");
             mCamera.setImageURI(uri);
         }
         else if (requestCode == PICK_FILE_REQUEST && resultCode == Activity.RESULT_OK)
@@ -289,6 +288,11 @@ public class RegisterActivity extends AppCompatActivity {
             Path pathsToFile = Paths.get(uriFile.getPath());
             selectedFilePath = pathsToFile.toString();
             uploadFile.setText(selectedFilePath);
+            try {
+                bitmapDocument = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uriFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -350,6 +354,16 @@ public class RegisterActivity extends AppCompatActivity {
             expDate.setText(String.valueOf(getIntent().getStringExtra("exp_date")));
             uploadFile.setText(selectedFilePath);
 
+            if(!selectedFilePath.equals(""))
+            {
+                uriFile = Uri.fromFile(new File(selectedFilePath));
+                try {
+                    bitmapDocument = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uriFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             if(getIntent().getStringExtra("image_ktp") != null)
             {
                 image = new File(getIntent().getStringExtra("image_ktp"));
@@ -372,7 +386,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void SelectMedia()
     {
-        final CharSequence[] options = {"Browse Image", "Browse PDF", "cancel"};
+        final CharSequence[] options = {"Browse Image", "cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
         builder.setTitle("upload file");
         builder.setItems(options, new DialogInterface.OnClickListener() {
@@ -383,10 +397,10 @@ public class RegisterActivity extends AppCompatActivity {
                 {
                     showImageChooser();
                 }
-                else if (options[item].equals("Browse PDF"))
+              /*  else if (options[item].equals("Browse PDF"))
                 {
                     showFileChooser();
-                }
+                }*/
                 else if (options[item].equals("Cancel"))
                 {
                     dialog.dismiss();
