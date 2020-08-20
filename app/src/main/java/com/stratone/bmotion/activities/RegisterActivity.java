@@ -46,8 +46,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -164,25 +166,38 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         /*Datetime NOW*/
-        final DatePickerDialog.OnDateSetListener dateNow = new DatePickerDialog.OnDateSetListener() {
+       /* final DatePickerDialog.OnDateSetListener dateNow = new DatePickerDialog(RegisterActivity.this
+                , R.style.DatePickerDialog
+                , new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateExpDate();
             }
-        };
+        };*/
+
+        final DatePickerDialog datepicker = new DatePickerDialog(this, R.style.DatePickerDialog,
+                new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateExpDate();
+            }
+        }, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+
 
         /*Pick Date*/
         expDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(RegisterActivity.this, dateNow, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                datepicker.show();
+               /* new DatePickerDialog(RegisterActivity.this,dateNow, myCalendar.get(Calendar.YEAR)
+                        , myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
             }
         });
 
