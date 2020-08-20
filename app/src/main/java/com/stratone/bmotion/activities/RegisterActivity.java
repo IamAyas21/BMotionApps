@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -38,7 +40,10 @@ import com.stratone.bmotion.rest.ApiInterface;
 import com.stratone.bmotion.utils.SessionManager;
 import com.stratone.bmotion.utils.UploadService;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -151,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(ValidateRegister())
                 {
-                    arrFile[0] = image;
+                    arrFile[0] = createTempFile(imageBitmap);//image;
                     arrFile[1] = new File(selectedFilePath);
                     signUp(arrFile);
                 }
@@ -270,6 +275,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+            imageBitmap = (Bitmap) data.getExtras().get("data");
             mCamera.setImageURI(uri);
         }
         else if (requestCode == PICK_FILE_REQUEST && resultCode == Activity.RESULT_OK)
@@ -284,6 +290,26 @@ public class RegisterActivity extends AppCompatActivity {
             selectedFilePath = pathsToFile.toString();
             uploadFile.setText(selectedFilePath);
         }
+    }
+
+    private File createTempFile(Bitmap bitmap) {
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                , System.currentTimeMillis() +"_image.webp");
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.WEBP,0, bos);
+        byte[] bitmapdata = bos.toByteArray();
+        //write the bytes in file
+
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 
     private void showFileChooser() {
@@ -329,6 +355,11 @@ public class RegisterActivity extends AppCompatActivity {
                 image = new File(getIntent().getStringExtra("image_ktp"));
                 uri = Uri.fromFile(new File(image.getPath()));
                 mCamera.setImageURI(uri);
+                try {
+                    imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

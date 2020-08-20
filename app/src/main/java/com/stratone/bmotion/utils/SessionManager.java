@@ -38,6 +38,7 @@ public class SessionManager {
     private static final String KEY_EXPIRES = "expires";
     private static final String KEY_QUOTA = "quota";
     private static final String KEY_PURCHASED_BBM = "purchaseBBM";
+    private static final String KEY_VERIFY = "isVerify";
   /*  private static final String KEY_PHONE = "phone";
     private static final String KEY_PASSWORD = "password";*/
 
@@ -58,6 +59,7 @@ public class SessionManager {
         editor.putString(KEY_NIP, user.getNIP());
         editor.putString(KEY_QUOTA, user.getQuota());
         editor.putString(KEY_PURCHASED_BBM, user.getPurchaseBBM());
+        editor.putString(KEY_VERIFY, user.getVerification());
      /*   editor.putString(KEY_PHONE, user.getPhone());
         editor.putString(KEY_PASSWORD, user.getPassword());*/
 
@@ -80,7 +82,6 @@ public class SessionManager {
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             _context.startActivity(i);
         }
-
     }
 
 
@@ -95,6 +96,7 @@ public class SessionManager {
         user.setNIP(pref.getString(KEY_NIP, null));
         user.setQuota(pref.getString(KEY_QUOTA, null));
         user.setPurchaseBBM(pref.getString(KEY_PURCHASED_BBM, null));
+        user.setVerification(pref.getString(KEY_VERIFY, null));
         /*user.setPhone(pref.getString(KEY_PHONE, null));
         user.setPassword(pref.getString(KEY_PASSWORD, null));*/
         return user;
@@ -126,37 +128,4 @@ public class SessionManager {
         return currentDate.before(expiryDate);
         /*return pref.getBoolean(IS_LOGIN, false);*/
     }
-
-   /* public User refreshSession(final Context context)
-    {
-        user = getUserDetails();
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        apiService.limitquota(user.getNIP()).enqueue(new Callback<ResponseUser>() {
-            @Override
-            public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
-                if(response.isSuccessful())
-                {
-                    if(response.body().getStatus().equals("success"))
-                    {
-                        user = response.body().getUser();
-                        SessionManager sessionManager = new SessionManager(context);
-                        sessionManager.createLoginSession(user);
-                    }
-                    else {
-                        Toast.makeText(context,response.body().getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else if(!response.isSuccessful())
-                {
-                    Toast.makeText(context,context.getResources().getString(R.string.login_failed),Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseUser> call, Throwable t) {
-                Toast.makeText(context,context.getResources().getString(R.string.connect_server_failed),Toast.LENGTH_SHORT).show();
-            }
-        });
-        return user;
-    }*/
 }

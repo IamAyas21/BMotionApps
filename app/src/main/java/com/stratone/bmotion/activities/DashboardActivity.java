@@ -100,10 +100,23 @@ public class DashboardActivity extends AppCompatActivity {
         input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, InputActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
-                finish();
+                if(user.getVerification() != null)
+                {
+                    if(user.getVerification().equals("N"))
+                    {
+                        Toast.makeText(DashboardActivity.this,getResources().getString(R.string.prompt_not_verify),Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Intent intent = new Intent(DashboardActivity.this, InputActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+                else {
+                    Toast.makeText(DashboardActivity.this,getResources().getString(R.string.prompt_not_verify),Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -168,9 +181,17 @@ public class DashboardActivity extends AppCompatActivity {
     private void SetInstance(User user)
     {
         eFullName.setText(user.getName());
-        quota.setText(user.getQuota());
+
         purchasedBBM.setText(user.getPurchaseBBM());
-        Log.e(TAG,"PurchaseBBM: "+user.getPurchaseBBM());
+
+        if(user.getQuota() != null)
+        {
+            quota.setText(user.getQuota());
+        }
+        else
+        {
+            quota.setText("0 Ltr");
+        }
 
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("MMM yyyy", Locale.getDefault());

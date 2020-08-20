@@ -42,6 +42,10 @@ public class User {
     @Expose
     private String purchaseBBM;
 
+    @SerializedName("Verification")
+    @Expose
+    private String verfication;
+
     public String getNIP() {
         return nIP;
     }
@@ -125,5 +129,13 @@ public class User {
 
     public void setPurchaseBBM(String purchaseBBM) {
         this.purchaseBBM = purchaseBBM;
+    }
+
+    public String getVerification() {
+        return verfication;
+    }
+
+    public void setVerification(String verfication) {
+        this.verfication = verfication;
     }
 }
