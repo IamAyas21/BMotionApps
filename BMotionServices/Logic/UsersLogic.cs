@@ -69,8 +69,8 @@ namespace BMotionServices.Logic
                             string dateDayNow = DateTime.Now.ToString("ddMMyyyy");
                             string dateTimeDayNow = DateTime.Now.ToString("ddMMyyyyHHmmss");
 
-                            var pathImgKtp = Path.Combine(HttpContext.Current.Server.MapPath(pathUpload), dateDayNow,"KTP");
-                            var pathFilePdf = Path.Combine(HttpContext.Current.Server.MapPath(pathUpload),dateDayNow, "Document");
+                            var pathImgKtp = Path.Combine(pathUpload, "KTP");//(HttpContext.Current.Server.MapPath(pathUpload), dateDayNow,"KTP");
+                            var pathFilePdf = Path.Combine(pathUpload, "Document");//(HttpContext.Current.Server.MapPath(pathUpload),dateDayNow, "Document");
 
                             if (!Directory.Exists(pathImgKtp))
                             {
@@ -104,6 +104,7 @@ namespace BMotionServices.Logic
                             userEntity.CreatedDate = DateTime.Now;
                             userEntity.CreatedBy = strUser;
                             userEntity.Password = user.Password.ToString().Replace('"', ' ').Replace('\\', ' ').Trim();
+                            userEntity.IsVerify = "N";
                             //userEntity.verification = user.Verification.ToString().Replace('"', ' ').Replace('"', ' ');
                             //userEntity.Profession = user.Profession.ToString().Replace('"', ' ').Replace('"', ' ');
                             //userEntity.RoleId = user.RoleId;
@@ -115,11 +116,12 @@ namespace BMotionServices.Logic
                             Document docEntity = new Document();
                             docEntity.DocumentNo = "Doc_" + dateTimeDayNow;
                             docEntity.NIP = strUser;
-                            docEntity.Quota = 200;
+                            docEntity.Quota = 0;
                             docEntity.DocumentFile = user.FilePDF;
                             docEntity.ExpDate = Convert.ToDateTime(user.ExpDate.ToString().Replace('"', ' ').Replace('\\', ' ').Trim());
                             docEntity.CreatedDate = DateTime.Now;
                             docEntity.CreatedBy = strUser;
+                            docEntity.IsVerify = "N";
                             db.Documents.Add(docEntity);
                             db.SaveChanges();
                         }
