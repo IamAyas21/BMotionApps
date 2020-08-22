@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">BMotion</string>
     <!-- Strings related to login -->
-    <string name="prompt_user_login">email/phone no</string>
+    <string name="prompt_user_login">email/telp</string>
     <string name="prompt_email">email</string>
     <string name="prompt_password">password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -13,14 +13,14 @@
     <string name="login_success">"Login berhasil"</string>
     <string name="prompt_forgot_password">Forgot Password?</string>
     <string name="prompt_remember_me">Remember me</string>
-    <string name="prompt_create_account">Create Account</string>
+    <string name="prompt_create_account">Daftar Baru</string>
     <string name="connect_server_failed">Gagal konek dengan server</string>
     <string name="prompt_sign_up">Sign Up</string>
-    <string name="prompt_nik">-- NIK --</string>
-    <string name="prompt_fullname">-- fullname --</string>
-    <string name="prompt_email_address">-- email address --</string>
-    <string name="prompt_phone_numb">-- phone number --</string>
-    <string name="prompt_city">-- city --</string>
+    <string name="prompt_nik">-- No. KTP --</string>
+    <string name="prompt_fullname">-- Nama Lengkap --</string>
+    <string name="prompt_email_address">-- Email --</string>
+    <string name="prompt_phone_numb">-- Telp --</string>
+    <string name="prompt_city">-- Kota --</string>
     <string name="disclaimer_sign_up_1">your password will be sent</string>
     <string name="disclaimer_sign_up_2">to your email address</string>
     <string name="prompt_capture">Capture</string>
@@ -28,7 +28,9 @@
     <string name="msg">Mohon terima semua permisi</string>
     <string name="pick_date">Pick Date</string>
     <string name="prompt_add_file_upload">-- upload dokumen --</string>
-    <string name="prompt_exp_date">-- expired date --</string>
+    <string name="prompt_exp_date">-- Masa Berlaku --</string>
+    <string name="prompt_quota">-- Quota --</string>
+    <string name="prompt_noSurat">-- No. Surat --</string>
     <string name="prompt_signup_password">-- password --</string>
     <string name="prompt_failed_get_file">Tidak dapat mendapatkan file upload</string>
     <string name="b_motion">B-MOTION</string>

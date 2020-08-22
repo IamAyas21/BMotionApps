@@ -41,6 +41,8 @@ public interface ApiInterface {
             @Part("phone") String phone,
             @Part("ktp") String ktp,
             @Part("expdate") String expdate,
+            @Part("quota") String quota,
+            @Part("documentNo") String documentNo,
             @Part MultipartBody.Part imagektp,
             @Part MultipartBody.Part filepdf
             );

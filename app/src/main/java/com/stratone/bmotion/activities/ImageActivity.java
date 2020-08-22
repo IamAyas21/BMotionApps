@@ -61,7 +61,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     private String mImageFileLocation = "";
     public static final String IMAGE_DIRECTORY_NAME = "Android File Upload";
     ProgressDialog pDialog;
-    private String imagePath, filePath, nik, fullName, email, password, phone, city, expDate;
+    private String imagePath, filePath, nik, fullName, email, password, phone, city, expDate, quota, documentNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +92,8 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
             city = String.valueOf(getIntent().getStringExtra("city"));
             expDate = String.valueOf(getIntent().getStringExtra("exp_date"));
             isObject = Integer.valueOf(getIntent().getIntExtra("object",0));
+            quota = String.valueOf(getIntent().getStringExtra("quota"));
+            documentNo = String.valueOf(getIntent().getStringExtra("documentNo"));
 
             if(getIntent().getStringExtra("image_ktp") != null)
             {
@@ -123,6 +125,8 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         intent.putExtra("exp_date",expDate);
         intent.putExtra("object",isObject);
         intent.putExtra("path_file",filePath);
+        intent.putExtra("quota",quota);
+        intent.putExtra("documentNo",documentNo);
     }
 
     @Override
