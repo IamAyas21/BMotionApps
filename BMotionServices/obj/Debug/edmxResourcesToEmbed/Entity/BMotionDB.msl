@@ -44,6 +44,8 @@
     <EntitySetMapping Name="OrderDetails">
       <EntityTypeMapping TypeName="BMotionDBModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetails">
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="IsVerify" ColumnName="IsVerify" />
           <ScalarProperty Name="OrderDetailId" ColumnName="OrderDetailId" />
           <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
           <ScalarProperty Name="FuelId" ColumnName="FuelId" />
@@ -122,6 +124,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="BMotionDBModel.User">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
           <ScalarProperty Name="NIP" ColumnName="NIP" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
           <ScalarProperty Name="OutletNo" ColumnName="OutletNo" />

@@ -45,10 +45,12 @@
     <Property Name="OrderNo" Type="varchar" MaxLength="50" />
     <Property Name="FuelId" Type="int" />
     <Property Name="Liter" Type="int" />
+    <Property Name="IsVerify" Type="varchar" MaxLength="1" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
     <Property Name="UpdatedDate" Type="datetime" />
     <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="Price" Type="money" />
   </EntityType>
   <EntityType Name="Orders">
     <Key>
@@ -127,6 +129,7 @@
     <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
     <Property Name="UpdatedDate" Type="datetime" />
     <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="IsAdmin" Type="varchar" MaxLength="1" />
   </EntityType>
   <Association Name="FK_Documents_Users">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
