@@ -347,6 +347,7 @@
     <Property Type="String" Name="TransactionDate" Nullable="true" MaxLength="4000" />
     <Property Type="String" Name="OutletNo" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="Liter" Nullable="true" MaxLength="34" />
+    <Property Type="String" Name="ExpiredDate" Nullable="true" MaxLength="4000" />
   </ComplexType>
   <ComplexType Name="sp_StrukPengambilanBBM_Result">
     <Property Type="String" Name="OrderNo" Nullable="false" MaxLength="50" />

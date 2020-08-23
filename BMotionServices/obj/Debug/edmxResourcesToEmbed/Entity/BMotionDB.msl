@@ -168,6 +168,7 @@
           <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
           <ScalarProperty Name="OutletNo" ColumnName="OutletNo" />
           <ScalarProperty Name="Liter" ColumnName="Liter" />
+          <ScalarProperty Name="ExpiredDate" ColumnName="ExpiredDate" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

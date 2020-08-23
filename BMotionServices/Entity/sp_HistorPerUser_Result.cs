@@ -25,6 +25,8 @@ public partial class sp_HistorPerUser_Result
 
     public string Liter { get; set; }
 
+    public string ExpiredDate { get; set; }
+
 }
 
 }
