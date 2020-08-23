@@ -44,6 +44,8 @@ namespace BMotionServices.Logic
                 orderEntity.IsVerify = "N";
                 orderEntity.CreatedDate = DateTime.Now;
                 orderEntity.CreatedBy = orderEntity.NIP;
+                orderEntity.ExpiredDate = DateTime.Now.AddHours(4);
+                order.ExpiredDate = DateTime.Now.AddHours(4).ToString("HH:mm");
                 db.Orders.Add(orderEntity);
                 db.SaveChanges();
 

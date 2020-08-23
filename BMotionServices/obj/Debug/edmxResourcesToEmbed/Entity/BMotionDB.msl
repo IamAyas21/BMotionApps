@@ -60,6 +60,7 @@
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="BMotionDBModel.Order">
         <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="ExpiredDate" ColumnName="ExpiredDate" />
           <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
           <ScalarProperty Name="NIP" ColumnName="NIP" />
           <ScalarProperty Name="IsVerify" ColumnName="IsVerify" />

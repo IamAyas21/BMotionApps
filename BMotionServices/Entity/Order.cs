@@ -41,6 +41,8 @@ public partial class Order
 
     public string UpdatedBy { get; set; }
 
+    public Nullable<System.DateTime> ExpiredDate { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
