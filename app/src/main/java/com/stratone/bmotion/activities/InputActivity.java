@@ -288,6 +288,7 @@ public class InputActivity extends AppCompatActivity {
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                             intent.putExtra("orderNo",response.body().getData().getOrderNo());
                             intent.putExtra("liter",purchasedBBM);
+                            intent.putExtra("expDate",response.body().getData().getExpiredDate());
                             startActivity(intent);
                             finish();
                         }

@@ -9,12 +9,19 @@ public class Orders {
     @SerializedName("OrderNo")
     @Expose
     private String orderNo;
+
     @SerializedName("NIP")
     @Expose
     private String nIP;
+
     @SerializedName("IsVerify")
     @Expose
     private String isVerify;
+
+    @SerializedName("ExpiredDate")
+    @Expose
+    private String expiredDate;
+
     @SerializedName("OrderDetails")
     @Expose
     private List<OrderDetails> orderDetails = null;
@@ -41,6 +48,14 @@ public class Orders {
 
     public void setIsVerify(String isVerify) {
         this.isVerify = isVerify;
+    }
+
+    public String getExpiredDate() {
+        return expiredDate;
+    }
+
+    public void setExpiredDate(String expiredDate) {
+        this.expiredDate = expiredDate;
     }
 
     public List<OrderDetails> getOrderDetails() {
