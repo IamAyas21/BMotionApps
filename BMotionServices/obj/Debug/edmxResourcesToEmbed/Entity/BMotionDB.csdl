@@ -54,6 +54,8 @@
     <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Fuel" Relationship="Self.FK_OrderDetails_Fuels" FromRole="OrderDetails" ToRole="Fuels" />
     <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
+    <Property Name="IsVerify" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -68,6 +70,7 @@
     <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
     <NavigationProperty Name="User" Relationship="Self.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
+    <Property Name="ExpiredDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Outlet">
     <Key>
@@ -143,6 +146,7 @@
     <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
     <NavigationProperty Name="Outlet" Relationship="Self.FK_Users_Outlets" FromRole="Users" ToRole="Outlets" />
     <NavigationProperty Name="Role" Relationship="Self.FK_Users_Role" FromRole="Users" ToRole="Role" />
+    <Property Name="IsAdmin" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Documents_Users">
     <End Role="Users" Type="Self.User" Multiplicity="0..1" />
