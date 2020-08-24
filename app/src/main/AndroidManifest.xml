@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.InfoActivity"></activity>
+        <activity android:name=".activities.SuggestionActivity"></activity>
+        <activity android:name=".activities.InfoActivity" />
         <activity android:name=".activities.SupportActivity" />
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.OrderActivity" />
@@ -38,11 +39,14 @@
         <meta-data
             android:name="com.google.android.actions"/>
         -->
-        <service android:name=".activities.InfoActivity">
+        <service
+            android:name=".utils.InfoFirebaseServices"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.bmotion.android.fileprovider"

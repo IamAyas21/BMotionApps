@@ -39,6 +39,7 @@ public class InfoFirebaseServices extends com.google.firebase.messaging.Firebase
     }
 
     private  void sendNotification(String title,String messageBody) {
+        Log.d("Firebase Log",title+messageBody);
         Intent[] intents= new Intent[1];
         Intent intent= new Intent(this,InfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

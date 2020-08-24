@@ -3,9 +3,12 @@ package com.stratone.bmotion.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,34 +27,41 @@ public class InfoActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+
         onNewIntent(getIntent());
         FirebaseMessaging.getInstance().
                 subscribeToTopic("ServiceNow");
     }
 
-    @SuppressLint("MissingSuperCall")
     @Override
     public void onNewIntent(Intent intent) {
-        Bundle extras = intent.getExtras();
-        if (extras != null) {
-            setContentView(R.layout.activity_info);
-            final TextView IncidentTextView =
-                    (TextView) findViewById(R.id.txtIncidentNo);
-            final TextView SDescTextView =
-                    (TextView) findViewById(R.id.txtShortDesc);
+        super.onNewIntent(intent);
+        try {
+            Bundle extras = intent.getExtras();
+            if (extras != null) {
+                setContentView(R.layout.activity_info);
+                final TextView IncidentTextView =
+                        (TextView) findViewById(R.id.txtIncidentNo);
+                final TextView SDescTextView =
+                        (TextView) findViewById(R.id.txtShortDesc);
 
-            final TextView DescTextView =
-                    (TextView) findViewById(R.id.txtDesc);
-            strSDesc = extras.getString("ShortDesc",
-                    "ShortDesc");
-            strIncidentNo = extras.getString("IncidentNo",
-                    "IncidentNo");
-            strDesc = extras.getString("Description",
-                    "IncidentNo");
+                final TextView DescTextView =
+                        (TextView) findViewById(R.id.txtDesc);
+                strSDesc = extras.getString("ShortDesc",
+                        "ShortDesc");
+                strIncidentNo = extras.getString("IncidentNo",
+                        "IncidentNo");
+                strDesc = extras.getString("Description",
+                        "IncidentNo");
 
-            IncidentTextView.setText(strIncidentNo);
-            SDescTextView.setText(strSDesc);
-            DescTextView.setText(strDesc);
+                IncidentTextView.setText(strIncidentNo);
+                SDescTextView.setText(strSDesc);
+                DescTextView.setText(strDesc);
+                Log.d("Firebase Log","Sukses");
+            }
+        }catch (Exception e)
+        {
+            Log.d("Firebase Log",e.getMessage());
         }
     }
 

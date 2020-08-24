@@ -73,4 +73,5 @@
     <string name="prompt_failed_get_quota">Gagal perbaharui limit quota</string>
     <string name="prompt_failed_get_fuel">Gagal perbaharui BBM</string>
     <string name="prompt_not_verify">User anda belum terverifikasi, silahkan datang ke Administrator untuk proses verifikasi</string>
+    <string name="prompt_submit">Submit</string>
 </resources>
