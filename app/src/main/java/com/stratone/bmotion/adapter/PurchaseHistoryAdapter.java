@@ -56,6 +56,8 @@ public class PurchaseHistoryAdapter extends ArrayAdapter<PurchaseHistory>
             holder.trxDate = v.findViewById(R.id.trxDate);
             holder.outlet = v.findViewById(R.id.outlet);
             holder.liter = v.findViewById(R.id.liter);
+            holder.trxExpDate = v.findViewById(R.id.trxExpDate);
+            holder.trxNo = v.findViewById(R.id.trxNo);
 
             v.setTag(holder);
         } else {
@@ -66,6 +68,8 @@ public class PurchaseHistoryAdapter extends ArrayAdapter<PurchaseHistory>
         holder.trxDate.setText(purchaseHistory.getTransactionDate());
         holder.outlet.setText(purchaseHistory.getOutletNo());
         holder.liter.setText(purchaseHistory.getLiter());
+        holder.trxExpDate.setText(purchaseHistory.getExpiredDate());
+        holder.trxNo.setText(purchaseHistory.getOrderNo());
 
         return v;
     }
@@ -78,6 +82,6 @@ public class PurchaseHistoryAdapter extends ArrayAdapter<PurchaseHistory>
     }
 
     static class PurchaseHistoryHolder {
-        TextView trxDate, outlet, liter;
+        TextView trxDate, outlet, liter, trxExpDate, trxNo;
     }
 }
