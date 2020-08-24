@@ -50,7 +50,7 @@ namespace BMotionServices.Controllers
                             NIP = userList.FirstOrDefault().NIP,
                             Phone = userList.FirstOrDefault().Phone,
                             Profession = userList.FirstOrDefault().Profession,
-                            Quota = quota,
+                            Quota = quota.Quota,
                             PurchaseBBM = purchasedBBM,
                             Password = userList.FirstOrDefault().Password,
                             Verification = userList.FirstOrDefault().IsVerify
@@ -75,7 +75,7 @@ namespace BMotionServices.Controllers
                                 NIP = userList.FirstOrDefault().NIP,
                                 Phone = userList.FirstOrDefault().Phone,
                                 Profession = userList.FirstOrDefault().Profession,
-                                Quota = quota,
+                                Quota = quota.Quota,
                                 PurchaseBBM = purchasedBBM,
                                 Password = userList.FirstOrDefault().Password,
                                 Verification = userList.FirstOrDefault().IsVerify
@@ -127,7 +127,7 @@ namespace BMotionServices.Controllers
                             NIP = user.NIP,
                             Phone = user.Phone,
                             Profession = user.Profession,
-                            Quota = quota == null ? "0 Ltr" : quota,
+                            Quota = quota.Quota == null ? "0 Ltr" : quota.Quota,
                             PurchaseBBM = purchasedBBM == null ? "0 Ltr" : purchasedBBM,
                             Password = user.Password,
                             Verification = "N"
@@ -165,16 +165,7 @@ namespace BMotionServices.Controllers
                 {
                     string purchasedBBM = string.Empty;
                     int limitQuota = 0;
-                    string quota = db.sp_UserQuota(userList.FirstOrDefault().NIP).FirstOrDefault().Replace("ltr","").Trim();
-                    if(db.sp_UserPurchasedBBM(userList.FirstOrDefault().NIP).FirstOrDefault() != null)
-                    {
-                        purchasedBBM = db.sp_UserPurchasedBBM(userList.FirstOrDefault().NIP).FirstOrDefault().Replace("ltr", "").Trim();
-                        limitQuota = Convert.ToInt32(quota) - Convert.ToInt32(purchasedBBM);
-                    }
-                    else
-                    {
-                        limitQuota = Convert.ToInt32(quota);
-                    }
+                    var quota = db.sp_UserQuota(userList.FirstOrDefault().NIP).FirstOrDefault();
 
                     return new ResponseUsers
                     {
@@ -187,8 +178,8 @@ namespace BMotionServices.Controllers
                             NIP = userList.FirstOrDefault().NIP,
                             Phone = userList.FirstOrDefault().Phone,
                             Profession = userList.FirstOrDefault().Profession,
-                            Quota = limitQuota.ToString() + " ltr",
-                            PurchaseBBM = purchasedBBM + " ltr",
+                            Quota = quota.Quota,
+                            PurchaseBBM = quota.TotalPurchaseBBM,
                             Password = userList.FirstOrDefault().Password,
                             Verification = userList.FirstOrDefault().IsVerify
                         }

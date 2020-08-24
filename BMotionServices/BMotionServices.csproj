@@ -273,6 +273,9 @@
     <Compile Include="Entity\sp_UserPengguna_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sp_UserQuota_Result.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\sysdiagram.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
