@@ -10,21 +10,17 @@
 namespace BMotionServices.Entity
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Document
+    public partial class sp_OrderAllActivity_Result
     {
-        public string DocumentNo { get; set; }
+        public Nullable<long> Number { get; set; }
+        public string OrderNo { get; set; }
         public string NIP { get; set; }
-        public string DocumentFile { get; set; }
-        public Nullable<int> Quota { get; set; }
-        public Nullable<System.DateTime> ExpDate { get; set; }
+        public string Username { get; set; }
         public string IsVerify { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public string UpdatedBy { get; set; }
-    
-        public virtual User User { get; set; }
+        public int OrderDetailId { get; set; }
+        public Nullable<int> FuelId { get; set; }
+        public string FuelName { get; set; }
+        public Nullable<int> Liter { get; set; }
     }
 }

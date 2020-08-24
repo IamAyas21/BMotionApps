@@ -48,14 +48,14 @@
     <Property Name="OrderNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FuelId" Type="Int32" />
     <Property Name="Liter" Type="Int32" />
+    <Property Name="IsVerify" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
     <NavigationProperty Name="Fuel" Relationship="Self.FK_OrderDetails_Fuels" FromRole="OrderDetails" ToRole="Fuels" />
     <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
-    <Property Name="IsVerify" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -68,9 +68,10 @@
     <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ExpiredDate" Type="DateTime" Precision="3" />
+    <Property Name="Print" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
     <NavigationProperty Name="User" Relationship="Self.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
-    <Property Name="ExpiredDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Outlet">
     <Key>
@@ -142,11 +143,11 @@
     <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsAdmin" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Documents" Relationship="Self.FK_Documents_Users" FromRole="Users" ToRole="Documents" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
     <NavigationProperty Name="Outlet" Relationship="Self.FK_Users_Outlets" FromRole="Users" ToRole="Outlets" />
     <NavigationProperty Name="Role" Relationship="Self.FK_Users_Role" FromRole="Users" ToRole="Role" />
-    <Property Name="IsAdmin" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Documents_Users">
     <End Role="Users" Type="Self.User" Multiplicity="0..1" />
@@ -317,19 +318,29 @@
     <FunctionImport Name="sp_HistorPerUser" ReturnType="Collection(BMotionDBModel.sp_HistorPerUser_Result)">
       <Parameter Name="nip" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="sp_OrderAllActivity" ReturnType="Collection(BMotionDBModel.sp_OrderAllActivity_Result)" />
+    <FunctionImport Name="sp_OrderMonitoring" ReturnType="Collection(BMotionDBModel.sp_OrderMonitoring_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="sp_renamediagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="sp_RiwayatPengambilanBBM" ReturnType="Collection(BMotionDBModel.sp_RiwayatPengambilanBBM_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="sp_StrukPengambilanBBM" ReturnType="Collection(BMotionDBModel.sp_StrukPengambilanBBM_Result)">
       <Parameter Name="orderNo" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="sp_UserPengguna" ReturnType="Collection(BMotionDBModel.sp_UserPengguna_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="sp_UserPurchasedBBM" ReturnType="Collection(String)">
       <Parameter Name="nip" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="sp_UserQuota" ReturnType="Collection(String)">
+    <FunctionImport Name="sp_UserQuota" ReturnType="Collection(BMotionDBModel.sp_UserQuota_Result)">
       <Parameter Name="nip" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
@@ -339,7 +350,7 @@
     <Property Type="String" Name="DocumentNo" Nullable="false" MaxLength="50" />
     <Property Type="DateTime" Name="ExpDate" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="Quota" Nullable="true" />
-    <Property Type="String" Name="Status" Nullable="false" MaxLength="12" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="10" />
     <Property Type="String" Name="DocumentName" Nullable="true" MaxLength="250" />
   </ComplexType>
   <ComplexType Name="sp_HistorPerUser_Result">
@@ -347,13 +358,55 @@
     <Property Type="String" Name="TransactionDate" Nullable="true" MaxLength="4000" />
     <Property Type="String" Name="OutletNo" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="Liter" Nullable="true" MaxLength="34" />
+    <Property Type="String" Name="ExpiredDate" Nullable="true" MaxLength="4000" />
+  </ComplexType>
+  <ComplexType Name="sp_OrderAllActivity_Result">
+    <Property Type="Int64" Name="Number" Nullable="true" />
+    <Property Type="String" Name="OrderNo" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="NIP" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Username" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="IsVerify" Nullable="true" MaxLength="1" />
+    <Property Type="Int32" Name="OrderDetailId" Nullable="false" />
+    <Property Type="Int32" Name="FuelId" Nullable="true" />
+    <Property Type="String" Name="FuelName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Liter" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_OrderMonitoring_Result">
+    <Property Type="Int64" Name="No" Nullable="true" />
+    <Property Type="String" Name="CreatedDate" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="NIP" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="Total" Nullable="true" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Fuel" Nullable="false" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="sp_RiwayatPengambilanBBM_Result">
+    <Property Type="Int64" Name="No" Nullable="true" />
+    <Property Type="String" Name="CreateDate" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="NIP" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Fuel" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Liter" Nullable="true" />
   </ComplexType>
   <ComplexType Name="sp_StrukPengambilanBBM_Result">
     <Property Type="String" Name="OrderNo" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="OrderDetailId" Nullable="false" />
     <Property Type="String" Name="OutletNo" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="OutletName" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="FuelName" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="Liter" Nullable="true" />
     <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="sp_UserPengguna_Result">
+    <Property Type="Int64" Name="NO" Nullable="true" />
+    <Property Type="String" Name="NIP" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Verify" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="sp_UserQuota_Result">
+    <Property Type="String" Name="Quota" Nullable="false" MaxLength="16" />
+    <Property Type="String" Name="TotalPurchaseBBM" Nullable="false" MaxLength="16" />
   </ComplexType>
 </Schema>

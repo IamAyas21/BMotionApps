@@ -11,14 +11,13 @@ namespace BMotionServices.Entity
 {
     using System;
     
-    public partial class sp_DocumentListByUser_Result
+    public partial class sp_UserPengguna_Result
     {
-        public Nullable<long> No { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string DocumentNo { get; set; }
-        public Nullable<System.DateTime> ExpDate { get; set; }
-        public Nullable<int> Quota { get; set; }
-        public string Status { get; set; }
-        public string DocumentName { get; set; }
+        public Nullable<long> NO { get; set; }
+        public string NIP { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string Verify { get; set; }
     }
 }
