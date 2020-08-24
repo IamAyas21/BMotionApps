@@ -34,7 +34,7 @@ import java.util.Locale;
 
 public class DashboardActivity extends AppCompatActivity {
     TextView eFullName, eDateNow, quota, purchasedBBM;
-    LinearLayout input, support, profile, lnWallet, lnHistory, lnHome, lnProfile;
+    LinearLayout input, support, profile, info, lnWallet, lnHistory, lnHome, lnProfile;
     SwipeRefreshLayout mSwipeRefreshLayout;
    /* @BindView(R.id.fullName)
     TextView eFullName;
@@ -82,6 +82,7 @@ public class DashboardActivity extends AppCompatActivity {
         input = findViewById(R.id.input);
         support= findViewById(R.id.support);
         profile= findViewById(R.id.profile);
+        info= findViewById(R.id.info);
 
         apiService = ApiClient.getClient().create(ApiInterface.class);
 
@@ -134,6 +135,16 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardActivity.this, SupportActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, InfoActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 finish();

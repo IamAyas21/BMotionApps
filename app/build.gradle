@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -53,6 +54,9 @@ dependencies {
     /*QR Code*/
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
     implementation project(':QRGenearator')
+
+    /*Firebase*/
+    implementation 'com.google.firebase:firebase-messaging:17.4.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
