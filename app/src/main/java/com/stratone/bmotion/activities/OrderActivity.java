@@ -45,10 +45,10 @@ public class OrderActivity extends AppCompatActivity {
 
     ImageView barcode;
     ImageButton back;
-    TextView purchased;
+    TextView purchased, tExpDate;
     LinearLayout lnWallet, lnHistory, lnHome, lnProfile;
 
-    private String orderNo;
+    private String orderNo, expDate;
     private QRGEncoder qrgEncoder;
     private Bitmap bitmap;
     private int purchasedBBM;
@@ -67,6 +67,7 @@ public class OrderActivity extends AppCompatActivity {
         barcode = findViewById(R.id.barcode);
         back = findViewById(R.id.imgBtnBack);
         purchased = findViewById(R.id.purchased);
+        tExpDate = findViewById(R.id.tExpDate);
         lnWallet = findViewById(R.id.lnWallet);
         lnHistory = findViewById(R.id.lnHistory);
         lnHome = findViewById(R.id.lnHome);
@@ -81,6 +82,7 @@ public class OrderActivity extends AppCompatActivity {
         GenerateQRCode();
 
         purchased.setText(purchasedBBM + " ltr");
+        tExpDate.setText(expDate);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,6 +132,7 @@ public class OrderActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             orderNo = getIntent().getStringExtra("orderNo");
             purchasedBBM = getIntent().getIntExtra("liter",0);
+            expDate = getIntent().getStringExtra("expDate");
         }
     }
 

@@ -13,29 +13,23 @@ namespace BMotionServices.Entity
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class Menu
+public partial class sp_OrderMonitoring_Result
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Menu()
-    {
+    public Nullable<long> No { get; set; }
 
-        this.Restrictions = new HashSet<Restriction>();
+    public string CreatedDate { get; set; }
 
-    }
-
-
-    public int MenuId { get; set; }
+    public string NIP { get; set; }
 
     public string Name { get; set; }
 
+    public Nullable<int> Total { get; set; }
 
+    public string Status { get; set; }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Restriction> Restrictions { get; set; }
+    public string Fuel { get; set; }
 
 }
 

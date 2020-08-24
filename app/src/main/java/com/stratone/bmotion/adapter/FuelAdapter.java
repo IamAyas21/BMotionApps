@@ -68,8 +68,8 @@ public class FuelAdapter extends ArrayAdapter<Fuel>
             });
 
             Fuel fuelModel = list.get(position);
-            holder.tvFuelName.setBackgroundColor(Color.parseColor(fuelModel.getBackgroundColor()));
-            holder.tvFuelName.setTextColor(Color.parseColor(fuelModel.getTextColor()));
+            holder.tvFuelName.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.tvFuelName.setTextColor(Color.parseColor("#000000"));
 
             v.setTag(holder);
         } else {

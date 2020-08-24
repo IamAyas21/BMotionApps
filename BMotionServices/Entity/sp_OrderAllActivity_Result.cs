@@ -13,30 +13,27 @@ namespace BMotionServices.Entity
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class Restriction
+public partial class sp_OrderAllActivity_Result
 {
 
-    public int RestrictionId { get; set; }
+    public Nullable<long> Number { get; set; }
 
-    public Nullable<int> MenuId { get; set; }
+    public string OrderNo { get; set; }
 
-    public Nullable<int> RoleId { get; set; }
+    public string NIP { get; set; }
 
-    public Nullable<bool> Read { get; set; }
+    public string Username { get; set; }
 
-    public Nullable<bool> Add { get; set; }
+    public string IsVerify { get; set; }
 
-    public Nullable<bool> Update { get; set; }
+    public int OrderDetailId { get; set; }
 
-    public Nullable<bool> Delete { get; set; }
+    public Nullable<int> FuelId { get; set; }
 
+    public string FuelName { get; set; }
 
-
-    public virtual Menu Menu { get; set; }
-
-    public virtual Role Role { get; set; }
+    public Nullable<int> Liter { get; set; }
 
 }
 

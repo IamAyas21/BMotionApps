@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical"
     android:orientation="vertical">
 
     <ImageView
@@ -10,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginTop="10dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@drawable/ic_camera" />
 
     <Button
         android:id="@+id/pickImage"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -22,8 +23,11 @@
 
     <Button
         android:id="@+id/OkImage"
-        android:layout_width="match_parent"
+        android:layout_width="154dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="OK" />
+        android:layout_margin="20dp"
+        android:background="@drawable/ripple_effect"
+        android:text="Ok"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center" />
 </LinearLayout>

@@ -9,21 +9,27 @@ public class User {
     @SerializedName("NIP")
     @Expose
     private String nIP;
+
     @SerializedName("RoleId")
     @Expose
     private Integer roleId;
+
     @SerializedName("Name")
     @Expose
     private String name;
+
     @SerializedName("Profession")
     @Expose
     private String profession;
+
     @SerializedName("Email")
     @Expose
     private String email;
+
     @SerializedName("Password")
     @Expose
     private String password;
+
     @SerializedName("Phone")
     @Expose
     private String phone;
@@ -31,6 +37,7 @@ public class User {
     @SerializedName("KTP")
     @Expose
     private String ktp;
+
     @SerializedName("ExpDate")
     @Expose
     private String expdate;
@@ -38,6 +45,7 @@ public class User {
     @SerializedName("Quota")
     @Expose
     private String quota;
+
     @SerializedName("PurchaseBBM")
     @Expose
     private String purchaseBBM;
@@ -45,6 +53,10 @@ public class User {
     @SerializedName("Verification")
     @Expose
     private String verfication;
+
+    @SerializedName("DocumentNo")
+    @Expose
+    private String documentNo;
 
     public String getNIP() {
         return nIP;
@@ -137,5 +149,13 @@ public class User {
 
     public void setVerification(String verfication) {
         this.verfication = verfication;
+    }
+
+    public String getDocumentNo() {
+        return documentNo;
+    }
+
+    public void setDocumentNo(String documentNo) {
+        this.documentNo = documentNo;
     }
 }

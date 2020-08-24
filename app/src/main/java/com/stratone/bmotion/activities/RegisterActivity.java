@@ -105,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
     ImageView mCamera;
     Button bSignUp;
     EditText eNIK, eFullName, ePassword,
-    eEmail, ePhone, eCity, expDate, uploadFile;
+    eEmail, ePhone, eCity, expDate, uploadFile,quotaSK,docNo;
     ImageButton back;
 
     @Override
@@ -126,6 +126,8 @@ public class RegisterActivity extends AppCompatActivity {
         eCity = findViewById(R.id.edtCity);
         expDate = findViewById(R.id.expiredDate);
         uploadFile = findViewById(R.id.uploadFile);
+        quotaSK = findViewById(R.id.quotaSK);
+        docNo = findViewById(R.id.docNo);
         back = findViewById(R.id.imgBtnBack);
 
         SessionManager sessionManager = new SessionManager(getApplicationContext());
@@ -166,18 +168,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         /*Datetime NOW*/
-       /* final DatePickerDialog.OnDateSetListener dateNow = new DatePickerDialog(RegisterActivity.this
-                , R.style.DatePickerDialog
-                , new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateExpDate();
-            }
-        };*/
 
         final DatePickerDialog datepicker = new DatePickerDialog(this, R.style.DatePickerDialog,
                 new DatePickerDialog.OnDateSetListener() {
@@ -206,7 +196,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isObject = 2;
-                SelectMedia();
+                /*SelectMedia();*/
+                showImageChooser();
             }
         });
 
@@ -248,6 +239,8 @@ public class RegisterActivity extends AppCompatActivity {
         user.setPhone(ePhone.getText().toString());
         user.setExpdate(expDate.getText().toString());
         user.setPassword(ePassword.getText().toString());
+        user.setQuota(quotaSK.getText().toString());
+        user.setDocumentNo(docNo.getText().toString());
         user.setKTP(file[0].getName());
 
         uploadService = new UploadService();
@@ -352,6 +345,8 @@ public class RegisterActivity extends AppCompatActivity {
         intent.putExtra("phone_number",ePhone.getText().toString());
         intent.putExtra("city",eCity.getText().toString());
         intent.putExtra("exp_date",expDate.getText().toString());
+        intent.putExtra("quota",quotaSK.getText().toString());
+        intent.putExtra("documentNo",docNo.getText().toString());
         intent.putExtra("path_file",selectedFilePath);
     }
 
@@ -367,6 +362,8 @@ public class RegisterActivity extends AppCompatActivity {
             ePhone.setText(String.valueOf(getIntent().getStringExtra("phone_number")));
             eCity.setText(String.valueOf(getIntent().getStringExtra("city")));
             expDate.setText(String.valueOf(getIntent().getStringExtra("exp_date")));
+            quotaSK.setText(String.valueOf(getIntent().getStringExtra("quota")));
+            docNo.setText(String.valueOf(getIntent().getStringExtra("documentNo")));
             uploadFile.setText(selectedFilePath);
 
             if(!selectedFilePath.equals(""))
@@ -434,54 +431,62 @@ public class RegisterActivity extends AppCompatActivity {
             {
                 if(!eFullName.getText().toString().equals(""))
                 {
-                    if(!eEmail.getText().toString().equals(""))
+                    if(!ePassword.getText().toString().equals(""))
                     {
-                        if(!ePassword.getText().toString().equals(""))
+                        if(!ePhone.getText().toString().equals(""))
                         {
-                            if(!ePhone.getText().toString().equals(""))
+                            if(!eCity.getText().toString().equals(""))
                             {
-                                if(!eCity.getText().toString().equals(""))
+                                if(!expDate.getText().toString().equals(""))
                                 {
-                                    if(!expDate.getText().toString().equals(""))
+                                    if(!uploadFile.getText().toString().equals(""))
                                     {
-                                        if(!uploadFile.getText().toString().equals(""))
+                                        if(!quotaSK.getText().toString().equals(""))
                                         {
-                                            isSuccess = true;
+                                            if(!docNo.getText().toString().equals(""))
+                                            {
+                                                isSuccess = true;
+                                            }
+                                            else
+                                            {
+                                                docNo.setError(getResources().getString(R.string.error_cant_empty));
+                                                docNo.requestFocus();
+                                            }
                                         }
                                         else
                                         {
-                                            uploadFile.setError(getResources().getString(R.string.error_cant_empty));
-                                            uploadFile.requestFocus();
+                                            quotaSK.setError(getResources().getString(R.string.error_cant_empty));
+                                            quotaSK.requestFocus();
                                         }
                                     }
                                     else
                                     {
-                                        expDate.setError(getResources().getString(R.string.error_cant_empty));
-                                        expDate.requestFocus();
+                                        uploadFile.setError(getResources().getString(R.string.error_cant_empty));
+                                        uploadFile.requestFocus();
                                     }
                                 }
                                 else
                                 {
-                                    eCity.setError(getResources().getString(R.string.error_cant_empty));
-                                    eCity.requestFocus();
+                                    expDate.setError(getResources().getString(R.string.error_cant_empty));
+                                    expDate.requestFocus();
                                 }
                             }
                             else
                             {
-                                ePhone.setError(getResources().getString(R.string.error_cant_empty));
-                                ePhone.requestFocus();
+                                eCity.setError(getResources().getString(R.string.error_cant_empty));
+                                eCity.requestFocus();
                             }
                         }
                         else
                         {
-                            ePassword.setError(getResources().getString(R.string.error_cant_empty));
-                            ePassword.requestFocus();
+                            ePhone.setError(getResources().getString(R.string.error_cant_empty));
+                            ePhone.requestFocus();
                         }
                     }
                     else
                     {
-                        eEmail.setError(getResources().getString(R.string.error_cant_empty));
-                        eEmail.requestFocus();
+                        ePassword.setError(getResources().getString(R.string.error_cant_empty));
+                        ePassword.requestFocus();
                     }
                 }
                 else

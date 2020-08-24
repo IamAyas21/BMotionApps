@@ -13,29 +13,21 @@ namespace BMotionServices.Entity
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class Menu
+public partial class sp_RiwayatPengambilanBBM_Result
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Menu()
-    {
+    public Nullable<long> No { get; set; }
 
-        this.Restrictions = new HashSet<Restriction>();
+    public string CreateDate { get; set; }
 
-    }
-
-
-    public int MenuId { get; set; }
+    public string NIP { get; set; }
 
     public string Name { get; set; }
 
+    public string Name1 { get; set; }
 
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Restriction> Restrictions { get; set; }
+    public Nullable<int> Liter { get; set; }
 
 }
 

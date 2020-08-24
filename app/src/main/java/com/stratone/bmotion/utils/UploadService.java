@@ -47,7 +47,7 @@ public class UploadService {
     }
 
     public void SignUpMultipart(User user, MultipartBody.Part imageKTP, MultipartBody.Part pdfFile, Callback callback) {
-        uploadInterface.registerMultipart(user.getNIP(),user.getName(),user.getProfession(),user.getEmail(),user.getPassword(),user.getPhone(), user.getKTP(), user.getExpdate(),imageKTP, pdfFile).enqueue(callback);
+        uploadInterface.registerMultipart(user.getNIP(),user.getName(),user.getProfession(),user.getEmail(),user.getPassword(),user.getPhone(), user.getKTP(), user.getExpdate(),user.getQuota(),user.getDocumentNo(),imageKTP, pdfFile).enqueue(callback);
     }
 
     public void SignUpBase64(User user, MultipartBody.Part ktp, Callback callback) {
