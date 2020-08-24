@@ -249,6 +249,49 @@ public partial class BMotionDBEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_UserQuota", nipParameter);
     }
 
+
+    public virtual ObjectResult<sp_OrderAllActivity_Result> sp_OrderAllActivity()
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_OrderAllActivity_Result>("sp_OrderAllActivity");
+    }
+
+
+    public virtual ObjectResult<sp_OrderMonitoring_Result> sp_OrderMonitoring(string userId)
+    {
+
+        var userIdParameter = userId != null ?
+            new ObjectParameter("UserId", userId) :
+            new ObjectParameter("UserId", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_OrderMonitoring_Result>("sp_OrderMonitoring", userIdParameter);
+    }
+
+
+    public virtual ObjectResult<sp_RiwayatPengambilanBBM_Result> sp_RiwayatPengambilanBBM(string userId)
+    {
+
+        var userIdParameter = userId != null ?
+            new ObjectParameter("UserId", userId) :
+            new ObjectParameter("UserId", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_RiwayatPengambilanBBM_Result>("sp_RiwayatPengambilanBBM", userIdParameter);
+    }
+
+
+    public virtual ObjectResult<sp_UserPengguna_Result> sp_UserPengguna(string userId)
+    {
+
+        var userIdParameter = userId != null ?
+            new ObjectParameter("UserId", userId) :
+            new ObjectParameter("UserId", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_UserPengguna_Result>("sp_UserPengguna", userIdParameter);
+    }
+
 }
 
 }

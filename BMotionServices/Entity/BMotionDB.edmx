@@ -69,6 +69,7 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
           <Property Name="ExpiredDate" Type="datetime" />
+          <Property Name="Print" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="Outlets">
           <Key>
@@ -264,15 +265,25 @@
         <Function Name="sp_HistorPerUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nip" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_OrderAllActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_OrderMonitoring" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_RiwayatPengambilanBBM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_StrukPengambilanBBM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="orderNo" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_UserPengguna" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_UserPurchasedBBM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nip" Type="varchar" Mode="In" />
         </Function>
@@ -398,6 +409,7 @@
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
           <NavigationProperty Name="User" Relationship="Self.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
           <Property Name="ExpiredDate" Type="DateTime" Precision="3" />
+          <Property Name="Print" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Outlet">
           <Key>
@@ -659,6 +671,16 @@
           <FunctionImport Name="sp_UserQuota" ReturnType="Collection(String)">
           <Parameter Name="nip" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_OrderAllActivity" ReturnType="Collection(BMotionDBModel.sp_OrderAllActivity_Result)" />
+          <FunctionImport Name="sp_OrderMonitoring" ReturnType="Collection(BMotionDBModel.sp_OrderMonitoring_Result)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_RiwayatPengambilanBBM" ReturnType="Collection(BMotionDBModel.sp_RiwayatPengambilanBBM_Result)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UserPengguna" ReturnType="Collection(BMotionDBModel.sp_UserPengguna_Result)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_DocumentListByUser_Result">
           <Property Type="Int64" Name="No" Nullable="true" />
@@ -683,6 +705,42 @@
           <Property Type="String" Name="FuelName" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Liter" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="sp_OrderAllActivity_Result">
+          <Property Type="Int64" Name="Number" Nullable="true" />
+          <Property Type="String" Name="OrderNo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NIP" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="IsVerify" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="OrderDetailId" Nullable="false" />
+          <Property Type="Int32" Name="FuelId" Nullable="true" />
+          <Property Type="String" Name="FuelName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Liter" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_OrderMonitoring_Result">
+          <Property Type="Int64" Name="No" Nullable="true" />
+          <Property Type="String" Name="CreatedDate" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="NIP" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Fuel" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="sp_RiwayatPengambilanBBM_Result">
+          <Property Type="Int64" Name="No" Nullable="true" />
+          <Property Type="String" Name="CreateDate" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="NIP" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Name1" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Liter" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_UserPengguna_Result">
+          <Property Type="Int64" Name="NO" Nullable="true" />
+          <Property Type="String" Name="NIP" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Verify" Nullable="false" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -749,6 +807,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="BMotionDBModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Print" ColumnName="Print" />
                 <ScalarProperty Name="ExpiredDate" ColumnName="ExpiredDate" />
                 <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
                 <ScalarProperty Name="NIP" ColumnName="NIP" />
@@ -877,6 +936,58 @@
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BMotionDBModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="sp_UserPurchasedBBM" FunctionName="BMotionDBModel.Store.sp_UserPurchasedBBM" />
           <FunctionImportMapping FunctionImportName="sp_UserQuota" FunctionName="BMotionDBModel.Store.sp_UserQuota" />
+          <FunctionImportMapping FunctionImportName="sp_OrderAllActivity" FunctionName="BMotionDBModel.Store.sp_OrderAllActivity">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_OrderAllActivity_Result">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="IsVerify" ColumnName="IsVerify" />
+                <ScalarProperty Name="OrderDetailId" ColumnName="OrderDetailId" />
+                <ScalarProperty Name="FuelId" ColumnName="FuelId" />
+                <ScalarProperty Name="FuelName" ColumnName="FuelName" />
+                <ScalarProperty Name="Liter" ColumnName="Liter" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_OrderMonitoring" FunctionName="BMotionDBModel.Store.sp_OrderMonitoring">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_OrderMonitoring_Result">
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Fuel" ColumnName="Fuel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_RiwayatPengambilanBBM" FunctionName="BMotionDBModel.Store.sp_RiwayatPengambilanBBM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_RiwayatPengambilanBBM_Result">
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Name1" ColumnName="Name1" />
+                <ScalarProperty Name="Liter" ColumnName="Liter" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_UserPengguna" FunctionName="BMotionDBModel.Store.sp_UserPengguna">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_UserPengguna_Result">
+                <ScalarProperty Name="NO" ColumnName="NO" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Verify" ColumnName="Verify" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
