@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.SuggestionActivity"></activity>
+        <activity android:name=".activities.FAQActivity"></activity>
+        <activity android:name=".activities.SuggestionActivity" />
         <activity android:name=".activities.InfoActivity" />
         <activity android:name=".activities.SupportActivity" />
         <activity android:name=".activities.ProfileActivity" />

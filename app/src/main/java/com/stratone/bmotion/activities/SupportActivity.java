@@ -22,7 +22,7 @@ public class SupportActivity extends AppCompatActivity {
     ImageView back;*/
 
     ImageView back;
-    LinearLayout lnWallet, lnHistory, lnHome, lnProfile, lnSaran;
+    LinearLayout lnWallet, lnHistory, lnHome, lnProfile, lnSaran, lnQuestionAnswer;
     SessionManager sessionManager;
 
     @Override
@@ -38,6 +38,7 @@ public class SupportActivity extends AppCompatActivity {
         lnHome = findViewById(R.id.lnHome);
         lnProfile= findViewById(R.id.lnProfile);
         lnSaran= findViewById(R.id.lnSaran);
+        lnQuestionAnswer= findViewById(R.id.lnQuestionAnswer);
 
         sessionManager = new SessionManager(getApplicationContext());
 
@@ -82,6 +83,16 @@ public class SupportActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SupportActivity.this, SuggestionActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        lnQuestionAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SupportActivity.this, FAQActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 finish();

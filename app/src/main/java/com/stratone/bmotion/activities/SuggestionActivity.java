@@ -70,7 +70,7 @@ public class SuggestionActivity extends AppCompatActivity {
 
     private void Back()
     {
-        Intent i = new Intent(SuggestionActivity.this, DashboardActivity.class);
+        Intent i = new Intent(SuggestionActivity.this, SupportActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(i);
         finish();
