@@ -346,6 +346,7 @@
     <EntitySet Name="Notifications" EntityType="BMotionDBModel.Notification" />
     <FunctionImport Name="sp_Feedback" ReturnType="Collection(BMotionDBModel.sp_Feedback_Result)" />
     <FunctionImport Name="sp_FeedbackInsert">
+      <Parameter Name="Nip" Mode="In" Type="String" />
       <Parameter Name="Feedback" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_HomeTotalFuel" ReturnType="Collection(BMotionDBModel.sp_HomeTotalFuel_Result)">

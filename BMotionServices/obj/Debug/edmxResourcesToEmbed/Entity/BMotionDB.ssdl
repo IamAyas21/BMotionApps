@@ -15,14 +15,6 @@
     <Property Name="UpdatedDate" Type="datetime" />
     <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Feedback">
-          <Property Name="FeedbackId" Type="varchar" MaxLength="50" />
-          <Property Name="CreateDate" Type="datetime" />
-          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
-          <Property Name="Feedback" Type="varchar(max)" />
-        </EntityType>-->
   <EntityType Name="Fuels">
     <Key>
       <PropertyRef Name="FuilId" />
@@ -269,6 +261,7 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
   </Function>
   <Function Name="sp_Feedback" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_FeedbackInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nip" Type="varchar" Mode="In" />
     <Parameter Name="Feedback" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

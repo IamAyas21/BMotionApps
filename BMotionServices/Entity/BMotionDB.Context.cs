@@ -224,13 +224,17 @@ namespace BMotionServices.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Feedback_Result>("sp_Feedback");
         }
     
-        public virtual int sp_FeedbackInsert(string feedback)
+        public virtual int sp_FeedbackInsert(string nip, string feedback)
         {
+            var nipParameter = nip != null ?
+                new ObjectParameter("Nip", nip) :
+                new ObjectParameter("Nip", typeof(string));
+    
             var feedbackParameter = feedback != null ?
                 new ObjectParameter("Feedback", feedback) :
                 new ObjectParameter("Feedback", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_FeedbackInsert", feedbackParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_FeedbackInsert", nipParameter, feedbackParameter);
         }
     
         public virtual ObjectResult<sp_HomeTotalFuel_Result> sp_HomeTotalFuel(string userId)
