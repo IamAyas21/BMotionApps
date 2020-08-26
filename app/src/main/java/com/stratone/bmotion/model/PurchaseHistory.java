@@ -19,6 +19,9 @@ public class PurchaseHistory {
     @SerializedName("Liter")
     @Expose
     private String liter;
+    @SerializedName("ExpiredDate")
+    @Expose
+    private String expiredDate;
 
     public Object getNIP() {
         return nIP;
@@ -58,5 +61,13 @@ public class PurchaseHistory {
 
     public void setLiter(String liter) {
         this.liter = liter;
+    }
+
+    public String getExpiredDate() {
+        return expiredDate;
+    }
+
+    public void setExpiredDate(String liter) {
+        this.expiredDate = expiredDate;
     }
 }

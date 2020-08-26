@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "89930155125",
+    "firebase_url": "https://bmotion.firebaseio.com",
+    "project_id": "bmotion",
+    "storage_bucket": "bmotion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89930155125:android:b8cc86fb5425cade39e43c",
+        "android_client_info": {
+          "package_name": "com.stratone.bmotion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89930155125-i65rcib9ruba8j90r4f1h6loq5645s2u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stratone.bmotion",
+            "certificate_hash": "d0f65812c1c7a30b440f75ced8ab05a1f6979d30"
+          }
+        },
+        {
+          "client_id": "89930155125-kpci7lfkioag71a70dmici76t4dd3mur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7hDLKzMo72OzoQIjOWGzysB9cEs7_68o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89930155125-kpci7lfkioag71a70dmici76t4dd3mur.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

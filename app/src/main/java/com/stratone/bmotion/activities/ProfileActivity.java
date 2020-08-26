@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -151,6 +152,22 @@ public class ProfileActivity extends AppCompatActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView liter, trxExpDate,trxNo;
+                liter = view.findViewById(R.id.liter);
+                trxExpDate = view.findViewById(R.id.trxExpDate);
+                trxNo = view.findViewById(R.id.trxNo);
+                Intent intent = new Intent(ProfileActivity.this, OrderActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.putExtra("orderNo",trxNo.getText().toString());
+                intent.putExtra("liter",Integer.parseInt(liter.getText().toString().replace(" ltr","")));
+                intent.putExtra("expDate",trxExpDate.getText().toString());
+                startActivity(intent);
             }
         });
     }
