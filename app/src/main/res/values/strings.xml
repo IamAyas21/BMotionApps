@@ -60,6 +60,7 @@
     <string name="error_cant_empty">Bidang tidak boleh kosong</string>
     <string name="prompt_set_your_image">Pilih gambar Anda</string>
     <string name="prompt_qr_code_is_your_queue">QR Code Antrian Anda</string>
+    <string name="prompt_title_kritik_saran">Kritik dan Saran</string>
     <string name="prompt_valid_until">Berlaku hingga</string>
     <string name="prompt_valid_time">10:00 am</string>
     <string name="prompt_remark_qr_code">Scan QR code ini di Kasir SPBU kami untuk mendapatkan\nstruk yang berisi barcode untuk ditunjukan kepada\noperator pengisian bahan bakar</string>
@@ -74,6 +75,7 @@
     <string name="prompt_failed_get_fuel">Gagal perbaharui BBM</string>
     <string name="prompt_not_verify">User anda belum terverifikasi, silahkan datang ke Administrator untuk proses verifikasi</string>
     <string name="prompt_submit">Submit</string>
+    <string name="prompt_kirim_masukan">Kirim Masukan</string>
     <string name="prompt_Question_1">Generated 1 paragraph, 72 words, 483 bytes</string>
     <string name="prompt_Answer_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam augue augue, dapibus a nisl a, fermentum posuere nunc. Aliquam ut aliquet metus, sed aliquam lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; .</string>
 </resources>
