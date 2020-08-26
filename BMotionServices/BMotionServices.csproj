@@ -209,6 +209,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FuelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -237,6 +238,9 @@
     <Compile Include="Entity\Menu.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Notification.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Order.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
@@ -255,7 +259,19 @@
     <Compile Include="Entity\sp_DocumentListByUser_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sp_Feedback_Result.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\sp_HistorPerUser_Result.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_HomeTotalFuel_Result.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_HomeUserPengguna_Result.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_Notification_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\sp_OrderAllActivity_Result.cs">
@@ -296,6 +312,7 @@
     <Compile Include="Logic\UsersLogic.cs" />
     <Compile Include="Models\PurchaseHistory.cs" />
     <Compile Include="Models\Users.cs" />
+    <Compile Include="Parse\ResponseInfo.cs" />
     <Compile Include="Parse\ResponseOrders.cs" />
     <Compile Include="Parse\ResponseFuels.cs" />
     <Compile Include="Parse\ResponsePurchaseHistory.cs" />
@@ -384,6 +401,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
     <Folder Include="Utils\" />
+    <Folder Include="Views\Info\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

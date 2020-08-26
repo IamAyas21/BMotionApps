@@ -249,5 +249,60 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="BMotionDBModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+          <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_Feedback" FunctionName="BMotionDBModel.Store.sp_Feedback">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BMotionDBModel.sp_Feedback_Result">
+          <ScalarProperty Name="NO" ColumnName="NO" />
+          <ScalarProperty Name="FeedbackId" ColumnName="FeedbackId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_FeedbackInsert" FunctionName="BMotionDBModel.Store.sp_FeedbackInsert" />
+    <FunctionImportMapping FunctionImportName="sp_HomeTotalFuel" FunctionName="BMotionDBModel.Store.sp_HomeTotalFuel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BMotionDBModel.sp_HomeTotalFuel_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HomeUserPengguna" FunctionName="BMotionDBModel.Store.sp_HomeUserPengguna">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BMotionDBModel.sp_HomeUserPengguna_Result">
+          <ScalarProperty Name="NO" ColumnName="NO" />
+          <ScalarProperty Name="NIP" ColumnName="NIP" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Verify" ColumnName="Verify" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Notification" FunctionName="BMotionDBModel.Store.sp_Notification">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BMotionDBModel.sp_Notification_Result">
+          <ScalarProperty Name="NO" ColumnName="NO" />
+          <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_NotificationInsert" FunctionName="BMotionDBModel.Store.sp_NotificationInsert" />
+    <FunctionImportMapping FunctionImportName="sp_OrderDetailVerify" FunctionName="BMotionDBModel.Store.sp_OrderDetailVerify" />
   </EntityContainerMapping>
 </Mapping>

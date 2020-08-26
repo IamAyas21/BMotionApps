@@ -228,4 +228,3 @@ C:\Project\BMotionApps\BMotionServices\bin\Microsoft.Owin.Security.MicrosoftAcco
 C:\Project\BMotionApps\BMotionServices\bin\System.Web.Http.Owin.xml
 C:\Project\BMotionApps\BMotionServices\obj\Debug\BMotionServices.dll
 C:\Project\BMotionApps\BMotionServices\obj\Debug\BMotionServices.pdb
-C:\Project\BMotionApps\BMotionServices\obj\Debug\BMotionServices.csprojResolveAssemblyReference.cache
