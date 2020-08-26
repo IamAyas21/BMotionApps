@@ -76,4 +76,7 @@
     <string name="prompt_submit">Submit</string>
     <string name="prompt_Question_1">Generated 1 paragraph, 72 words, 483 bytes</string>
     <string name="prompt_Answer_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam augue augue, dapibus a nisl a, fermentum posuere nunc. Aliquam ut aliquet metus, sed aliquam lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; .</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="fcm_message">FCM Message</string>
+    <string name="default_notification_channel_name" translatable="true">Weather</string>
 </resources>

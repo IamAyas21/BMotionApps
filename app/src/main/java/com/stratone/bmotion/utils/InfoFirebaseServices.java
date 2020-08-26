@@ -13,7 +13,9 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.RemoteMessage;
 import com.stratone.bmotion.R;
+import com.stratone.bmotion.activities.DashboardActivity;
 import com.stratone.bmotion.activities.InfoActivity;
+import com.stratone.bmotion.activities.LoginActivity;
 
 public class InfoFirebaseServices extends com.google.firebase.messaging.FirebaseMessagingService {
     public String TAG = "InfoFirebaseServices";
@@ -41,7 +43,7 @@ public class InfoFirebaseServices extends com.google.firebase.messaging.Firebase
     private  void sendNotification(String title,String messageBody) {
         Log.d("Firebase Log",title+messageBody);
         Intent[] intents= new Intent[1];
-        Intent intent= new Intent(this,InfoActivity.class);
+        Intent intent= new Intent(this, DashboardActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("IncidentNo", title);
         intent.putExtra("ShortDesc", messageBody);

@@ -9,6 +9,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.stratone.bmotion.R;
 import com.stratone.bmotion.model.User;
 import com.stratone.bmotion.response.ResponseUser;
@@ -36,6 +38,10 @@ public class DashboardActivity extends AppCompatActivity {
     TextView eFullName, eDateNow, quota, purchasedBBM;
     LinearLayout input, support, profile, info, lnWallet, lnHistory, lnHome, lnProfile;
     SwipeRefreshLayout mSwipeRefreshLayout;
+
+    static   String strSDesc = "ShortDesc";
+    static String strIncidentNo = "IncidentNo";
+    static String strDesc="IncidentNo";
    /* @BindView(R.id.fullName)
     TextView eFullName;
 
@@ -67,22 +73,13 @@ public class DashboardActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        /*setContentView(R.layout.activity_dashboard);*/
         /*ButterKnife.bind(this);*/
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
-        eFullName = findViewById(R.id.fullName);
-        eDateNow = findViewById(R.id.dateNow);
-        quota = findViewById(R.id.Quota);
-        purchasedBBM= findViewById(R.id.purchasedBBM);
-        lnWallet = findViewById(R.id.lnWallet);
-        lnHistory = findViewById(R.id.lnHistory);
-        lnHome = findViewById(R.id.lnHome);
-        lnProfile= findViewById(R.id.lnProfile);
-        input = findViewById(R.id.input);
-        support= findViewById(R.id.support);
-        profile= findViewById(R.id.profile);
-        info= findViewById(R.id.info);
+        onNewIntent(getIntent());
+        FirebaseMessaging.getInstance().subscribeToTopic("ServiceNow");
+
+        NewInstance(getIntent());
 
         apiService = ApiClient.getClient().create(ApiInterface.class);
 
@@ -187,6 +184,59 @@ public class DashboardActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void NewInstance(Intent intent)
+    {
+        Bundle extras = intent.getExtras();
+        if (extras == null)
+        {
+            setContentView(R.layout.activity_dashboard);
+            mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
+            eFullName = findViewById(R.id.fullName);
+            eDateNow = findViewById(R.id.dateNow);
+            quota = findViewById(R.id.Quota);
+            purchasedBBM= findViewById(R.id.purchasedBBM);
+            lnWallet = findViewById(R.id.lnWallet);
+            lnHistory = findViewById(R.id.lnHistory);
+            lnHome = findViewById(R.id.lnHome);
+            lnProfile= findViewById(R.id.lnProfile);
+            input = findViewById(R.id.input);
+            support= findViewById(R.id.support);
+            profile= findViewById(R.id.profile);
+            info= findViewById(R.id.info);
+        }
+    }
+    @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        try {
+            Bundle extras = intent.getExtras();
+            if (extras != null) {
+                setContentView(R.layout.activity_dashboard);
+             /*   final TextView IncidentTextView =
+                        (TextView) findViewById(R.id.txtIncidentNo);
+                final TextView SDescTextView =
+                        (TextView) findViewById(R.id.txtShortDesc);
+
+                final TextView DescTextView =
+                        (TextView) findViewById(R.id.txtDesc);*/
+                strSDesc = extras.getString("ShortDesc",
+                        "ShortDesc");
+                strIncidentNo = extras.getString("IncidentNo",
+                        "IncidentNo");
+                strDesc = extras.getString("Description",
+                        "IncidentNo");
+
+             /*   IncidentTextView.setText(strIncidentNo);
+                SDescTextView.setText(strSDesc);
+                DescTextView.setText(strDesc);*/
+                Log.d("Firebase Log","Sukses");
+            }
+        }catch (Exception e)
+        {
+            Log.d("Firebase Log",e.getMessage());
+        }
     }
 
     private void SetInstance(User user)
