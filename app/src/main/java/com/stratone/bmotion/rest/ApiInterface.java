@@ -5,7 +5,6 @@ import com.stratone.bmotion.model.Orders;
 import com.stratone.bmotion.model.PurchaseHistory;
 import com.stratone.bmotion.model.User;
 import com.stratone.bmotion.response.ResponseFuels;
-import com.stratone.bmotion.response.ResponseInfo;
 import com.stratone.bmotion.response.ResponseOrders;
 import com.stratone.bmotion.response.ResponsePurchaseHistory;
 import com.stratone.bmotion.response.ResponseUser;
@@ -84,6 +83,13 @@ public interface ApiInterface {
     @POST("api/user/limitquota")
     Call<ResponseUser> limitquota(
             @Field("nip") String nip
+    );
+
+    @FormUrlEncoded
+    @POST("api/feedback/add")
+    Call<ResponseSeggestion> addKritik(
+            @Field("Nip") String nip,
+            @Field("Message") String Message
     );
 
     @POST("api/info/all")
