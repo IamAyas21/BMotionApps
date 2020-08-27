@@ -55,14 +55,14 @@ public class InfoFirebaseServices extends com.google.firebase.messaging.Firebase
                 (RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationbuilder=
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_apk_box)
+                        .setSmallIcon(R.drawable.ic_logox)
                         .setContentTitle("Service Now")
                         .setContentText(messageBody)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent)
                         .setLargeIcon(BitmapFactory.decodeResource
-                                (getResources(), R.mipmap.ic_launcher));;
+                                (getResources(), R.mipmap.ic_logo));;
 
         NotificationManager notificationManager=(NotificationManager)
                 getSystemService(Context.NOTIFICATION_SERVICE);
