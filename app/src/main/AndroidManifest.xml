@@ -62,7 +62,7 @@
                 android:resource="@drawable/ic_logox" />
             <meta-data
                 android:name="com.google.firebase.messaging.default_notification_color"
-                android:resource="@color/colorAccent" />
+                android:resource="@color/colorBlue" />
         </provider>
 
         <activity android:name=".activities.DashboardActivity" android:screenOrientation="portrait"/>
