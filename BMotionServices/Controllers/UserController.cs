@@ -166,7 +166,6 @@ namespace BMotionServices.Controllers
                     string purchasedBBM = string.Empty;
                     int limitQuota = 0;
                     var quota = db.sp_UserQuota(userList.FirstOrDefault().NIP).FirstOrDefault();
-
                     return new ResponseUsers
                     {
                         status = "success",
