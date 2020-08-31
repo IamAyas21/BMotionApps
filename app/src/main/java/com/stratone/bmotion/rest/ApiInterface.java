@@ -5,6 +5,7 @@ import com.stratone.bmotion.model.Orders;
 import com.stratone.bmotion.model.PurchaseHistory;
 import com.stratone.bmotion.model.User;
 import com.stratone.bmotion.response.ResponseFuels;
+import com.stratone.bmotion.response.ResponseInfo;
 import com.stratone.bmotion.response.ResponseOrders;
 import com.stratone.bmotion.response.ResponsePurchaseHistory;
 import com.stratone.bmotion.response.ResponseSeggestion;
@@ -93,4 +94,8 @@ public interface ApiInterface {
             @Field("Message") String Message
     );
 
+    @POST("api/info/all")
+    Call<ResponseInfo> information(
+
+    );
     }

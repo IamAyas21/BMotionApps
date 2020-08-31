@@ -9,6 +9,7 @@ import android.util.SparseIntArray;
 import android.view.View;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ public abstract class AbsRunTimePermission extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mErrorString = new SparseIntArray();
+
     }
 
     public abstract void onPermissionGranted(int requestcode);

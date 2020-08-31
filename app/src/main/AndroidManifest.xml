@@ -19,23 +19,24 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_logo"
+
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.FAQActivity"></activity>
-        <activity android:name=".activities.SuggestionActivity" />
-        <activity android:name=".activities.InfoActivity" />
-        <activity android:name=".activities.SupportActivity" />
-        <activity android:name=".activities.ProfileActivity" />
-        <activity android:name=".activities.OrderActivity" />
-        <activity android:name=".activities.ImageActivity" />
-        <activity android:name=".activities.InputActivity" />
+        <activity android:name=".activities.FAQActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.SuggestionActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.InfoActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.SupportActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ProfileActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.OrderActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ImageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.InputActivity" android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.PdfActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme" android:screenOrientation="portrait"/>
         <!--
         <meta-data
             android:name="com.google.android.actions"/>
@@ -58,17 +59,18 @@
                 android:resource="@xml/file_paths" />
             <meta-data
                 android:name="com.google.firebase.messaging.default_notification_icon"
-                android:resource="@drawable/ic_info" />
+                android:resource="@drawable/ic_logox" />
             <meta-data
                 android:name="com.google.firebase.messaging.default_notification_color"
-                android:resource="@color/colorAccent" />
+                android:resource="@color/colorBlue" />
         </provider>
 
-        <activity android:name=".activities.DashboardActivity" />
-        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.DashboardActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activities.RegisterActivity" android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.LoginActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
