@@ -94,7 +94,7 @@ public class DashboardActivity extends AppCompatActivity {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
-
+        refreshDashboard();
         input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
