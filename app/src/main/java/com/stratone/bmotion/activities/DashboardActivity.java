@@ -214,24 +214,10 @@ public class DashboardActivity extends AppCompatActivity {
             Bundle extras = intent.getExtras();
             if (extras != null) {
                 setContentView(R.layout.activity_dashboard);
-             /*   final TextView IncidentTextView =
-                        (TextView) findViewById(R.id.txtIncidentNo);
-                final TextView SDescTextView =
-                        (TextView) findViewById(R.id.txtShortDesc);
-
-                final TextView DescTextView =
-                        (TextView) findViewById(R.id.txtDesc);*/
-                strSDesc = extras.getString("ShortDesc",
-                        "ShortDesc");
-                strIncidentNo = extras.getString("IncidentNo",
-                        "IncidentNo");
-                strDesc = extras.getString("Description",
-                        "IncidentNo");
-
-             /*   IncidentTextView.setText(strIncidentNo);
-                SDescTextView.setText(strSDesc);
-                DescTextView.setText(strDesc);*/
-                Log.d("Firebase Log","Sukses");
+                intent = new Intent(DashboardActivity.this, InfoActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+                finish();
             }
         }catch (Exception e)
         {

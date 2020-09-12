@@ -62,7 +62,7 @@ public class InfoFirebaseServices extends com.google.firebase.messaging.Firebase
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent)
                         .setLargeIcon(BitmapFactory.decodeResource
-                                (getResources(), R.mipmap.ic_logo));;
+                                (getResources(), R.drawable.ic_logox));;
 
         NotificationManager notificationManager=(NotificationManager)
                 getSystemService(Context.NOTIFICATION_SERVICE);
