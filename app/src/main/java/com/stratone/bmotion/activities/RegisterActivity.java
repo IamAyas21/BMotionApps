@@ -30,6 +30,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.stratone.bmotion.R;
@@ -91,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
     static final int REQUEST_TAKE_PHOTO = 100;
     private static final int PICK_FILE_REQUEST = 1;
     private int isObject = 0;
+    private boolean isSubsidy = false;
     private Uri uri, uriFile;
     private Bitmap imageBitmap, bitmapDocument;
     private String currentPhotoPath;
@@ -99,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
     private UploadService uploadService;
     final Calendar myCalendar = Calendar.getInstance();
     private static final String TAG = RegisterActivity.class.getSimpleName();
-    private File arrFile[] = new File[2];
+    private Bitmap arrFile[] = new Bitmap[2];
     private ProgressDialog pDialog;
 
     ImageView mCamera;
@@ -107,6 +110,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText eNIK, eFullName, ePassword,
     eEmail, ePhone, eCity, expDate, uploadFile,quotaSK,docNo;
     ImageButton back;
+    Switch switchSubsidy;
+    LinearLayout lnSuratKeterangan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +134,8 @@ public class RegisterActivity extends AppCompatActivity {
         quotaSK = findViewById(R.id.quotaSK);
         docNo = findViewById(R.id.docNo);
         back = findViewById(R.id.imgBtnBack);
+        switchSubsidy = findViewById(R.id.switchSubsidy);
+        lnSuratKeterangan = findViewById(R.id.lnSuratKeterangan);
 
         SessionManager sessionManager = new SessionManager(getApplicationContext());
         if(sessionManager.isLoggedIn())
@@ -160,8 +167,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(ValidateRegister())
                 {
-                    arrFile[0] = createTempFile(imageBitmap);//image;
-                    arrFile[1] = createTempFile(bitmapDocument);//new File(selectedFilePath);
+                    arrFile[0] = imageBitmap;//image;
+                    arrFile[1] = bitmapDocument;//new File(selectedFilePath);
                     signUp(arrFile);
                 }
             }
@@ -207,6 +214,25 @@ public class RegisterActivity extends AppCompatActivity {
                 Back();
             }
         });
+
+        switchSubsidy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (lnSuratKeterangan.getVisibility())
+                {
+                    case View.GONE:
+                        isSubsidy = true;
+                        switchSubsidy.setChecked(true);
+                        lnSuratKeterangan.setVisibility(View.VISIBLE);
+                        break;
+                    default:
+                        isSubsidy = false;
+                        switchSubsidy.setChecked(false);
+                        lnSuratKeterangan.setVisibility(View.GONE);
+                        break;
+                }
+            }
+        });
     }
 
     private void updateExpDate() {
@@ -216,7 +242,7 @@ public class RegisterActivity extends AppCompatActivity {
         expDate.setText(sdf.format(myCalendar.getTime()));
     }
 
-    private void signUp(File[] file)
+    private void signUp(Bitmap[] bitmaps)
     {
         pDialog = new ProgressDialog(RegisterActivity.this);
         pDialog.setMessage(getResources().getString(R.string.prompt_loading));
@@ -224,13 +250,23 @@ public class RegisterActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
         pDialog.show();
 
-        RequestBody photoBody = RequestBody.create(MediaType.parse("image/jpg"), file[0]);
-        MultipartBody.Part photoPart = MultipartBody.Part.createFormData("imagektp",
-                file[0].getName(), photoBody);
+        File file[] = new File[2];
+        MultipartBody.Part photoPart = null, pdfPart = null;
 
-        RequestBody pdfBody = RequestBody.create(MediaType.parse("application/pdf"), file[1]);
-        MultipartBody.Part pdfPart = MultipartBody.Part.createFormData("filepdf",
-                file[1].getName(), pdfBody);
+        if(bitmaps[0] != null)
+        {
+            file[0] = createTempFile(bitmaps[0]);
+            RequestBody photoBody = RequestBody.create(MediaType.parse("image/jpg"), file[0]);
+            photoPart = MultipartBody.Part.createFormData("imagektp",
+                    file[0].getName(), photoBody);
+        }
+        if(bitmaps[1] != null)
+        {
+            file[1] = createTempFile(bitmaps[1]);
+            RequestBody pdfBody = RequestBody.create(MediaType.parse("application/pdf"), file[1]);
+            pdfPart = MultipartBody.Part.createFormData("filepdf",
+                    file[1].getName(), pdfBody);
+        }
 
         final User user = new User();
         user.setNIP(eNIK.getText().toString());
@@ -348,6 +384,7 @@ public class RegisterActivity extends AppCompatActivity {
         intent.putExtra("quota",quotaSK.getText().toString());
         intent.putExtra("documentNo",docNo.getText().toString());
         intent.putExtra("path_file",selectedFilePath);
+        intent.putExtra("isSubsidy",isSubsidy);
     }
 
     private void GetPutExtra()
@@ -364,6 +401,7 @@ public class RegisterActivity extends AppCompatActivity {
             expDate.setText(String.valueOf(getIntent().getStringExtra("exp_date")));
             quotaSK.setText(String.valueOf(getIntent().getStringExtra("quota")));
             docNo.setText(String.valueOf(getIntent().getStringExtra("documentNo")));
+
             uploadFile.setText(selectedFilePath);
 
             if(!selectedFilePath.equals(""))
@@ -386,6 +424,15 @@ public class RegisterActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+
+            switchSubsidy.setChecked(getIntent().getBooleanExtra("isSubsidy",false));
+            if(switchSubsidy.isChecked())
+            {
+                lnSuratKeterangan.setVisibility(View.VISIBLE);
+            }
+            else {
+                lnSuratKeterangan.setVisibility(View.GONE);
             }
         }
     }
@@ -437,38 +484,44 @@ public class RegisterActivity extends AppCompatActivity {
                         {
                             if(!eCity.getText().toString().equals(""))
                             {
-                                if(!expDate.getText().toString().equals(""))
+                                if(lnSuratKeterangan.getVisibility() == View.VISIBLE)
                                 {
-                                    if(!uploadFile.getText().toString().equals(""))
+                                    if(!expDate.getText().toString().equals(""))
                                     {
-                                        if(!quotaSK.getText().toString().equals(""))
+                                        if(!uploadFile.getText().toString().equals(""))
                                         {
-                                            if(!docNo.getText().toString().equals(""))
+                                            if(!quotaSK.getText().toString().equals(""))
                                             {
-                                                isSuccess = true;
+                                                if(!docNo.getText().toString().equals(""))
+                                                {
+                                                    isSuccess = true;
+                                                }
+                                                else
+                                                {
+                                                    docNo.setError(getResources().getString(R.string.error_cant_empty));
+                                                    docNo.requestFocus();
+                                                }
                                             }
                                             else
                                             {
-                                                docNo.setError(getResources().getString(R.string.error_cant_empty));
-                                                docNo.requestFocus();
+                                                quotaSK.setError(getResources().getString(R.string.error_cant_empty));
+                                                quotaSK.requestFocus();
                                             }
                                         }
                                         else
                                         {
-                                            quotaSK.setError(getResources().getString(R.string.error_cant_empty));
-                                            quotaSK.requestFocus();
+                                            uploadFile.setError(getResources().getString(R.string.error_cant_empty));
+                                            uploadFile.requestFocus();
                                         }
                                     }
                                     else
                                     {
-                                        uploadFile.setError(getResources().getString(R.string.error_cant_empty));
-                                        uploadFile.requestFocus();
+                                        expDate.setError(getResources().getString(R.string.error_cant_empty));
+                                        expDate.requestFocus();
                                     }
                                 }
-                                else
-                                {
-                                    expDate.setError(getResources().getString(R.string.error_cant_empty));
-                                    expDate.requestFocus();
+                                else {
+                                    isSuccess = true;
                                 }
                             }
                             else

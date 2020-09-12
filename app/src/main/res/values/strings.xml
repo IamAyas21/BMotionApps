@@ -20,7 +20,7 @@
     <string name="prompt_fullname">-- Nama Lengkap --</string>
     <string name="prompt_email_address">-- Email --</string>
     <string name="prompt_phone_numb">-- Telp --</string>
-    <string name="prompt_city">-- Kota --</string>
+    <string name="prompt_city">-- Kecamatan --</string>
     <string name="disclaimer_sign_up_1">your password will be sent</string>
     <string name="disclaimer_sign_up_2">to your email address</string>
     <string name="prompt_capture">Capture</string>
@@ -81,4 +81,15 @@
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="fcm_message">FCM Message</string>
     <string name="default_notification_channel_name" translatable="true">Weather</string>
+    <string name="prompt_ktp">Photo KTP<font color="red">*</font></string>
+    <string name="prompt_nomor_ktp">Nomor KTP<font color="red">*</font></string>
+    <string name="prompt_nama_lengkap">Nama Lengkap<font color="red">*</font></string>
+    <string name="prompt_no_telp">Nomor Telephone<font color="red">*</font></string>
+    <string name="prompt_alamat_email">Alamat Email</string>
+    <string name="prompt_password_user">Password<font color="red">*</font></string>
+    <string name="prompt_kecamatan">Kecamatan<font color="red">*</font></string>
+    <string name="prompt_nomor_surat">Nomor Surat<font color="red">*</font></string>
+    <string name="prompt_input_quota">Quota<font color="red">*</font></string>
+    <string name="prompt_masa_berlaku">Masa Berlaku<font color="red">*</font></string>
+    <string name="prompt_dokumen">Surat Keterangan<font color="red">*</font></string>
 </resources>

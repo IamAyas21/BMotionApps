@@ -62,6 +62,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     public static final String IMAGE_DIRECTORY_NAME = "Android File Upload";
     ProgressDialog pDialog;
     private String imagePath, filePath, nik, fullName, email, password, phone, city, expDate, quota, documentNo;
+    private boolean isSubsidy = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
             isObject = Integer.valueOf(getIntent().getIntExtra("object",0));
             quota = String.valueOf(getIntent().getStringExtra("quota"));
             documentNo = String.valueOf(getIntent().getStringExtra("documentNo"));
+            isSubsidy = getIntent().getBooleanExtra("isSubsidy",false);
 
             if(getIntent().getStringExtra("image_ktp") != null)
             {
@@ -127,6 +129,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
         intent.putExtra("path_file",filePath);
         intent.putExtra("quota",quota);
         intent.putExtra("documentNo",documentNo);
+        intent.putExtra("isSubsidy",isSubsidy);
     }
 
     @Override

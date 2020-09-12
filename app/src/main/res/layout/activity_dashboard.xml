@@ -307,7 +307,6 @@
                                     android:textColor="@color/cardview_light_background"
                                     android:textSize="15sp" />
                             </LinearLayout>
-
                         </LinearLayout>
                     </LinearLayout>
 
@@ -316,6 +315,7 @@
                         android:layout_height="120dp"
                         android:layout_gravity="center"
                         android:layout_margin="20dp"
+                        android:visibility="gone"
                         android:background="@drawable/rounded_welcome_home"
                         android:orientation="horizontal">
 
