@@ -9,18 +9,23 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.squareup.picasso.Picasso;
 import com.stratone.bmotion.R;
 import com.stratone.bmotion.model.User;
 import com.stratone.bmotion.response.ResponseUser;
@@ -28,7 +33,11 @@ import com.stratone.bmotion.rest.ApiClient;
 import com.stratone.bmotion.rest.ApiInterface;
 import com.stratone.bmotion.utils.SessionManager;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,6 +47,7 @@ public class DashboardActivity extends AppCompatActivity {
     TextView eFullName, eDateNow, quota, purchasedBBM;
     LinearLayout input, support, profile, info, lnWallet, lnHistory, lnHome, lnProfile;
     SwipeRefreshLayout mSwipeRefreshLayout;
+    ImageView imgProfile, imgProfileMenu;
 
     static   String strSDesc = "ShortDesc";
     static String strIncidentNo = "IncidentNo";
@@ -67,6 +77,7 @@ public class DashboardActivity extends AppCompatActivity {
     User user;
 
     private boolean doubleBackToExitPressedOnce = false;
+    private String urlImage = "https://www.google.com/images/srpr/logo11w.png";
     private static final String TAG = "DashboardActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,6 +216,8 @@ public class DashboardActivity extends AppCompatActivity {
             support= findViewById(R.id.support);
             profile= findViewById(R.id.profile);
             info= findViewById(R.id.info);
+            imgProfile = findViewById(R.id.imgProfile);
+            imgProfileMenu = findViewById(R.id.imgProfileMenu);
         }
     }
     @Override
@@ -240,10 +253,14 @@ public class DashboardActivity extends AppCompatActivity {
             quota.setText("0 Ltr");
         }
 
+        Picasso.get().load(user.getImageProfilePath()).transform(new RoundedTransformation()).into(imgProfile);
+        Picasso.get().load(user.getImageProfilePath()).transform(new RoundedTransformation()).into(imgProfileMenu);
+
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
         eDateNow.setText(df.format(c));
     }
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {

@@ -16,24 +16,30 @@
         android:background="@drawable/rounded_bmotion"
         android:layout_alignParentTop="true">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
+            android:layout_height="600dp"
+            android:orientation="horizontal">
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="600dp">
 
-                <ListView
-                    android:id="@+id/lvInfo"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="600dp"
-                    android:dividerHeight="2dp"
-                    android:fillViewport="true" />
+                    android:orientation="vertical">
 
-            </LinearLayout>
-        </ScrollView>
+                    <ListView
+                        android:id="@+id/lvInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="600dp"
+                        android:dividerHeight="2dp"
+                        android:fillViewport="true" />
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
     </RelativeLayout>
 
     <RelativeLayout

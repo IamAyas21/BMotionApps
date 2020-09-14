@@ -39,6 +39,7 @@ public class SessionManager {
     private static final String KEY_QUOTA = "quota";
     private static final String KEY_PURCHASED_BBM = "purchaseBBM";
     private static final String KEY_VERIFY = "isVerify";
+    private static final String KEY_IMAGE_PROFILE_PATH = "imageProfilePath";
   /*  private static final String KEY_PHONE = "phone";
     private static final String KEY_PASSWORD = "password";*/
 
@@ -60,6 +61,7 @@ public class SessionManager {
         editor.putString(KEY_QUOTA, user.getQuota());
         editor.putString(KEY_PURCHASED_BBM, user.getPurchaseBBM());
         editor.putString(KEY_VERIFY, user.getVerification());
+        editor.putString(KEY_IMAGE_PROFILE_PATH, user.getImageProfilePath());
      /*   editor.putString(KEY_PHONE, user.getPhone());
         editor.putString(KEY_PASSWORD, user.getPassword());*/
 
@@ -97,6 +99,7 @@ public class SessionManager {
         user.setQuota(pref.getString(KEY_QUOTA, null));
         user.setPurchaseBBM(pref.getString(KEY_PURCHASED_BBM, null));
         user.setVerification(pref.getString(KEY_VERIFY, null));
+        user.setImageProfilePath(pref.getString(KEY_IMAGE_PROFILE_PATH, null));
         /*user.setPhone(pref.getString(KEY_PHONE, null));
         user.setPassword(pref.getString(KEY_PASSWORD, null));*/
         return user;

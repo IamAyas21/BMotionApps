@@ -14,20 +14,30 @@ android {
     }
     buildTypes {
         release {
+            lintOptions {
+                checkReleaseBuilds false
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [usesCleartextTraffic: false, crashlyticsEnabled: true]
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            manifestPlaceholders = [usesCleartextTraffic: true, crashlyticsEnabled: true]
         }
     }
     repositories {
-        maven {
-            url "http://dl.bintray.com/lukaville/maven"
-        }
+        maven {url "http://dl.bintray.com/lukaville/maven"}
+        /*maven { url "https://jitpack.io" }*/
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.annotation:annotation:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -58,6 +68,13 @@ dependencies {
     /*Firebase*/
     implementation 'com.google.firebase:firebase-messaging:17.4.0'
     implementation 'android.arch.work:work-runtime:1.0.1'
+
+    /*Picasso*/
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+   /* Support Android X*/
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.1'
+   /* implementation 'com.github.jkwiecien:EasyImage:1.3.1'*/
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

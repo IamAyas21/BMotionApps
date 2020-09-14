@@ -58,6 +58,10 @@ public class User {
     @Expose
     private String documentNo;
 
+    @SerializedName("ImageProfilePath")
+    @Expose
+    private String imageProfilePath;
+
     public String getNIP() {
         return nIP;
     }
@@ -157,5 +161,12 @@ public class User {
 
     public void setDocumentNo(String documentNo) {
         this.documentNo = documentNo;
+    }
+    public String getImageProfilePath() {
+        return imageProfilePath;
+    }
+
+    public void setImageProfilePath(String imageProfilePath) {
+        this.imageProfilePath = imageProfilePath;
     }
 }

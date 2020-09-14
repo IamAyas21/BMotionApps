@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.stratone.bmotion.R;
 import com.stratone.bmotion.adapter.FuelAdapter;
 import com.stratone.bmotion.adapter.PurchaseHistoryAdapter;
@@ -64,7 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
     ListView listView;
     TextView quota, purchasedBBM,phone, dateNow, fullName;
     LinearLayout lnWallet, lnHistory, lnHome, lnProfile;
-    ImageView back;
+    ImageView back, imgProfile;
 
     ApiInterface apiService;
     SessionManager sessionManager;
@@ -94,6 +95,7 @@ public class ProfileActivity extends AppCompatActivity {
         lnHistory = findViewById(R.id.lnHistory);
         lnHome = findViewById(R.id.lnHome);
         lnProfile= findViewById(R.id.lnProfile);
+        imgProfile = findViewById(R.id.imgProfile);
 
         apiService = ApiClient.getClient().create(ApiInterface.class);
 
@@ -105,6 +107,7 @@ public class ProfileActivity extends AppCompatActivity {
         quota.setText(user.getQuota());
         purchasedBBM.setText(user.getPurchaseBBM());
         phone.setText(user.getPhone());
+        Picasso.get().load(user.getImageProfilePath()).transform(new RoundedTransformation()).into(imgProfile);
 
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("MMM yyyy", Locale.getDefault());

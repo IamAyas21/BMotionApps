@@ -182,7 +182,6 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_TAKE_PHOTO || requestCode == REQUEST_PICK_PHOTO) {
                 if (data != null) {
@@ -209,8 +208,6 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                         filePath = mediaPath;
                     }
                 }
-
-
             } else if (requestCode == CAMERA_PIC_REQUEST) {
                 if (Build.VERSION.SDK_INT > 21) {
                     Glide.with(this).load(mImageFileLocation).into(preview);
@@ -236,9 +233,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                         filePath = fileUri.getPath();
                     }
                 }
-
             }
-
         } else if (resultCode != RESULT_CANCELED) {
             Toast.makeText(this, "Sorry, there was an error!", Toast.LENGTH_LONG).show();
         }
@@ -320,8 +315,6 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
             // start the image capture Intent
             startActivityForResult(intent, CAMERA_PIC_REQUEST);
         }
-
-
     }
 
     File createImageFile() throws IOException {
